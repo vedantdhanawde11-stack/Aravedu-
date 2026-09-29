@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Our Space</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Material Icons for WhatsApp-like UI -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Screen 1: PIN Login -->
+  <div id="login-screen" class="screen active">
+    <div class="login-card">
+      <h2>Welcome Back ❤️</h2>
+      <p>Select your profile</p>
+      <div class="profile-selector">
+        <button type="button" class="profile-btn" onclick="selectUser('partner1')">
+          <div class="avatar">👨</div>
+          <span>Partner 1</span>
+        </button>
+        <button type="button" class="profile-btn" onclick="selectUser('partner2')">
+          <div class="avatar">👩</div>
+          <span>Partner 2</span>
+        </button>
+      </div>
+
+      <div id="pin-container" class="hidden">
+        <p id="pin-prompt">Enter your 4-digit PIN</p>
+        <input type="password" id="pin-input" maxlength="4" placeholder="••••" inputmode="numeric">
+        <button type="button" class="primary-btn" onclick="verifyPin()">Unlock</button>
+        <p id="login-error" class="error-msg"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screen 2: Home Dashboard -->
+  <div id="home-screen" class="screen">
+    <header class="app-header">
+      <div class="user-greeting">
+        <span id="user-display-name">You</span>
+      </div>
+      <button class="icon-btn" onclick="logout()"><span class="material-icons">logout</span></button>
+    </header>
+
+    <main class="content-area">
+      <!-- Streak Banner -->
+      <section id="streak-card" class="card">
+        <div class="streak-header">
+          <div id="streak-icon" class="flame-icon">🔥</div>
+          <div class="streak-details">
+            <h3 id="streak-count">0 Days</h3>
+            <p id="streak-status">Today's Streak: Incomplete</p>
+          </div>
+        </div>
+        <div id="freeze-banner" class="freeze-alert hidden">
+          ❄️ Streak Frozen! Open the app together to unfreeze.
+        </div>
+      </section>
+
+      <!-- Daily Moment Section -->
+      <section class="card">
+        <h3>Daily Moment</h3>
+        <p class="subtitle">Both must post a photo or note to keep the flame glowing.</p>
+        
+        <div class="daily-inputs">
+          <textarea id="daily-note" placeholder="Write today's note..."></textarea>
+          
+          <div class="media-buttons">
+            <!-- Camera Snap -->
+            <label class="btn-action">
+              <span class="material-icons">photo_camera</span> Camera
+              <input type="file" id="camera-input" accept="image/*" capture="environment" hidden onchange="previewImage(this)">
+            </label>
+            
+            <!-- Gallery Picker -->
+            <label class="btn-action">
+              <span class="material-icons">photo_library</span> Gallery
+              <input type="file" id="gallery-input" accept="image/*" hidden onchange="previewImage(this)">
+            </label>
+          </div>
+
+          <div id="image-preview-container" class="hidden">
+            <img id="image-preview" src="" alt="Preview">
+          </div>
+
+          <button type="button" class="primary-btn" onclick="submitDailyMoment()">Post Today's Moment</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" onclick="switchTab('home')">
+        <span class="material-icons">home</span>
+        <span>Home</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('chat')">
+        <span class="material-icons">chat</span>
+        <span>Chat</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Screen 3: Chat Screen (WhatsApp Style) -->
+  <div id="chat-screen" class="screen">
+    <header class="chat-header">
+      <button class="icon-btn" onclick="switchTab('home')">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      <div class="chat-contact">
+        <div class="chat-avatar">❤️</div>
+        <div>
+          <h4 id="chat-partner-name">Partner</h4>
+          <span class="online-indicator">Online</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <!-- Placeholders for future WebRTC voice/video calls -->
+        <button class="icon-btn" title="Voice Call coming soon"><span class="material-icons">call</span></button>
+        <button class="icon-btn" title="Video Call coming soon"><span class="material-icons">videocam</span></button>
+      </div>
+    </header>
+
+    <div id="message-container" class="messages-area">
+      <!-- Realtime messages will populate here -->
+    </div>
+
+    <footer class="chat-input-bar">
+      <input type="text" id="chat-text-input" placeholder="Type a message..." onkeydown="handleChatEnter(event)">
+      <button class="send-btn" onclick="sendMessage()">
+        <span class="material-icons">send</span>
+      </button>
+    </footer>
+  </div>
+
+  <!-- Firebase Scripts (Compat v10 CDN) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+
+  <!-- App Scripts -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
