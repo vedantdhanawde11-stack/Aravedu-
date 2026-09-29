@@ -1,11 +1,13 @@
 // js/firebase-config.js
+js/firebase-config.js
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDRxvqL67OLgjQsig5Ecu0cPKoVIhZSfy0",
+  authDomain: "aravedu-couple30.firebaseapp.com",
+  projectId: "aravedu-couple30",
+  storageBucket: "aravedu-couple30.firebasestorage.app",
+  messagingSenderId: "1039357466069",
+  appId: "1:1039357466069:web:c4144d2fd07ecc310e595c",
+  measurementId: "G-M5G21F35QG"
 };
 
 // Initialize Firebase
